@@ -1,0 +1,13 @@
+<project name="generate-jarjar">
+	<property name="jarjarfile" value="commons-codec-1.6-jarjar.jar"/>
+	<path id="classpath">
+		<pathelement location="jarjar-1.4.jar"/>
+		<pathelement location="asm-2.2.3.jar"/>
+	</path>
+	<taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpathref="classpath"/>
+	<delete file="${jarjarfile}"/>
+	<jarjar destfile="${jarjarfile}">
+		<zipfileset src="commons-codec-1.6.jar"/>
+		<rule pattern="org.apache.**" result="org.jarjar.apache.@1"/>
+	</jarjar>
+</project>
